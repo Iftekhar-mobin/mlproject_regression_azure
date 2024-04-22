@@ -54,22 +54,42 @@ docker push testdockerifte.azurecr.io/mltestifte:latest
 - Refer to Azure documentation for more advanced configuration options and troubleshooting.
 
 
+1. **Azure CI/CD Setup**
 
-https://www.youtube.com/watch?v=g687fRBNNGo&list=PLZoTAELRMXVPS-dOaVbAux22vzqdgoGhG&index=13
+    **Container Registry Setup:**
+    - Find Container Registry: Locate the Container Registry service in the Azure portal.
+    - Registry Name + Resource group: Note down the Registry Name and the associated Resource group, for example, `testdockerifte.azurecr.io`.
+    - Enable Admin User: Access the Container Registry resource and enable the admin user. Remember the login server and password.
 
-Azure Set up for CICD
-https://www.youtube.com/watch?v=g687fRBNNGo&list=PLZoTAELRMXVPS-dOaVbAux22vzqdgoGhG&index=13&pp=iAQB
-Find Container Registry → Registry Name + Resource group → testdockerifte.azurecr.io (keeping docker image) 
-After Creation → go to resource → Access Keys → enable admin user → keep remember 
-Login server/password
-Create Webapp → Instance Name (mltestifte) → Resource testdockerifte → publish container (default value code)
-Go to Container Tab → Azure container registry → Image (Need to create from Local machine) → after the following step Image name should be in drop down list
+    **Web Application Deployment:**
+    - Create Webapp: Create a Web App instance named `mltestifte` linked to the `testdockerifte` resource group.
+    - Publish Container: During creation, choose to publish a container using the default code value.
+    - Container Tab: Navigate to the Container Tab within the Web App settings and specify the Azure Container Registry. Ensure the desired image appears in the dropdown list.
 
-Run from terminal:
-# docker build -t testdockerifte.azurecr.io/mltestifte:latest .
-# docker login testdockerifte.azurecr.io → here password is only the testdockerifte from testdockerifte.azurecr.io
-# docker push testdockerifte.azurecr.io/mltestifte:latest  → if there is any login issues then install azure cli → run the following commands in cmd
-az login
-az acr login --name testdockerifte
-Then Try again 
-Webapp → deployment center → source (Github action build deploy ….. ) → provide repository infos → continuous deployment Turn it on 
+    **Run from Terminal:**
+    ```bash
+    # Build Docker image
+    docker build -t testdockerifte.azurecr.io/mltestifte:latest .
+
+    # Login to Azure Container Registry
+    docker login testdockerifte.azurecr.io
+
+    # Push Docker image to Azure Container Registry
+    docker push testdockerifte.azurecr.io/mltestifte:latest
+    ```
+    If login issues occur, install Azure CLI and execute the following commands:
+    ```bash
+    az login
+    az acr login --name testdockerifte
+    ```
+
+    **Continuous Deployment Setup:**
+    - Deployment Center: In Web App settings, navigate to the Deployment Center.
+    - Source: Choose the source for continuous deployment (e.g., GitHub action build deploy).
+    - Provide repository information and turn on continuous deployment.
+
+2. **References**
+   - [Azure CI/CD Setup Video playlist ](https://www.youtube.com/watch?v=g687fRBNNGo&list=PLZoTAELRMXVPS-dOaVbAux22vzqdgoGhG&index=13)
+   - [Azure CI/CD Setup Video ](https://www.youtube.com/watch?v=g687fRBNNGo&list=PLZoTAELRMXVPS-dOaVbAux22vzqdgoGhG&index=13&pp=iAQB)
+
+Feel free to use this organized information for your documentation.
